@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef esp32_hal_gpio_H
 #define esp32_hal_gpio_H
 
-#include "freertos/FreeRTOS.h"
+#include "esp32_hal_common.h"
+#include "driver/gpio.h"
 
 class esp32_hal_gpio {
 public:
@@ -44,7 +45,11 @@ public:
      */
     bool ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown);
 
-    bool ModeOutput(gpio_num_t pinNumber);
+    /**
+     * Set a pin as output without pull-up or pull-down
+     * and set the value of the output
+     */
+    bool ModeOutput(gpio_num_t pinNumber, bool high);
 };
 
 #endif

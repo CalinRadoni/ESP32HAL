@@ -1,6 +1,6 @@
 /**
 This file is part of ESP32HAL esp-idf component (https://github.com/CalinRadoni/ESP32HAL)
-Copyright (C) 2019+ by Calin Radoni
+Copyright (C) 2020 by Calin Radoni
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,20 +16,4 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-
-//#include
-
-// -----------------------------------------------------------------------------
-
-CPU_I2C::CPU_I2C(void)
-{
-    //
-}
-
-CPU_I2C::~CPU_I2C()
-{
-    //
-}
-
-// -----------------------------------------------------------------------------
+#include "esp32_hal_cpu.h"

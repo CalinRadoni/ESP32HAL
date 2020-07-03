@@ -10,3 +10,4 @@
 
 # ignore auxiliary directories
 /notes/
+build/

@@ -33,9 +33,7 @@ esp32_hal_adc::~esp32_hal_adc()
     }
 }
 
-bool esp32_hal_adc::CalibrateADC1(void)
-{
-}
+// -----------------------------------------------------------------------------
 
 bool esp32_hal_adc::InitializeADC1(void)
 {
@@ -69,6 +67,8 @@ bool esp32_hal_adc::InitializeADC1_channel(adc1_channel_t channel, adc_atten_t a
     return true;
 }
 
+// -----------------------------------------------------------------------------
+
 uint32_t esp32_hal_adc::ReadADC1(adc1_channel_t channel)
 {
     return adc1_get_raw(channel);
@@ -87,7 +87,9 @@ uint32_t esp32_hal_adc::ReadADC1(adc1_channel_t channel, uint8_t samples)
     return val / samples;
 }
 
-bool ReadADC1_mV(adc1_channel_t channel, adc_atten_t attenuation, uint32_t* result)
+// -----------------------------------------------------------------------------
+
+bool esp32_hal_adc::ReadADC_mV(adc_channel_t channel, adc_atten_t attenuation, uint32_t* result)
 {
     if (result == nullptr) return false;
 
@@ -116,6 +118,8 @@ bool ReadADC1_mV(adc1_channel_t channel, adc_atten_t attenuation, uint32_t* resu
     return (res == ESP_OK) ? true : false;
 }
 
+// -----------------------------------------------------------------------------
+
 uint32_t esp32_hal_adc::ConvertToVoltage(uint32_t value, adc_atten_t attenuation)
 {
     esp_adc_cal_characteristics_t *characteristics = nullptr;
@@ -140,3 +144,5 @@ uint32_t esp32_hal_adc::ConvertToVoltage(uint32_t value, adc_atten_t attenuation
 
     return esp_adc_cal_raw_to_voltage(value, characteristics);
 }
+
+// -----------------------------------------------------------------------------

@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "esp32_hal_gpio.h"
 
+// -----------------------------------------------------------------------------
+
 esp32_hal_gpio::esp32_hal_gpio(void)
 {
     //
@@ -26,6 +28,8 @@ esp32_hal_gpio::~esp32_hal_gpio()
 {
     //
 }
+
+// -----------------------------------------------------------------------------
 
 bool esp32_hal_gpio::ModeDefault(gpio_num_t pinNumber)
 {
@@ -52,12 +56,12 @@ bool esp32_hal_gpio::ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown)
     err = gpio_config(&gc);
     if (err != ESP_OK) return false;
 
-    err = gpio_pad_select_gpio(pinNumber);
-    if (err != ESP_OK) return false;
+    gpio_pad_select_gpio(pinNumber);
 
     return true;
 }
-bool esp32_hal_gpio::ModeOutput(gpio_num_t pinNumber)
+
+bool esp32_hal_gpio::ModeOutput(gpio_num_t pinNumber, bool high)
 {
     if ((pinNumber < GPIO_NUM_0) || (pinNumber > GPIO_NUM_MAX)) return false;
 
@@ -65,16 +69,20 @@ bool esp32_hal_gpio::ModeOutput(gpio_num_t pinNumber)
     esp_err_t err;
 
     gc.pin_bit_mask = 1ULL << pinNumber;
-    gc.mode         = GPIO_MODE_;
-    gc.pull_up_en   = pullUp ? GPIO_PULLUP_ENABLE : GPIO_PULLUP_DISABLE;
-    gc.pull_down_en = pullDown ? GPIO_PULLDOWN_ENABLE : GPIO_PULLDOWN_DISABLE;
+    gc.mode         = GPIO_MODE_OUTPUT;
+    gc.pull_up_en   = GPIO_PULLUP_DISABLE;
+    gc.pull_down_en = GPIO_PULLDOWN_DISABLE;
     gc.intr_type    = GPIO_INTR_DISABLE;
 
     err = gpio_config(&gc);
     if (err != ESP_OK) return false;
 
-    err = gpio_pad_select_gpio(pinNumber);
+    err = gpio_set_level(pinNumber, high ? 1 : 0);
     if (err != ESP_OK) return false;
+
+    gpio_pad_select_gpio(pinNumber);
 
     return true;
 }
+
+// -----------------------------------------------------------------------------

@@ -40,12 +40,13 @@ extern "C" {
     void app_main()
     {
         esp32_hal_gpio hal_gpio;
+        esp32_hal_adc hal_adc;
 
         if (!hal_gpio.ModeInput(GPIO_BOOT, true, false)){
             ESP_LOGE(TAG, "hal_gpio.ModeInput failed !");
         }
 
-        /* Print chip information */
+        // Print chip information
         esp_chip_info_t chip_info;
         esp_chip_info(&chip_info);
         printf("This is ESP32 chip with %d CPU cores, WiFi%s%s, ",

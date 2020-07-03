@@ -19,9 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef esp32_hal_adc_H
 #define esp32_hal_adc_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "freertos/FreeRTOS.h"
+#include "esp32_hal_common.h"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
 
@@ -55,7 +53,7 @@ public:
     esp32_hal_adc(void);
     ~esp32_hal_adc();
 
-    bool InitializeADC1(void); ADC1_GPIO32_CHANNEL;
+    bool InitializeADC1(void);
     bool InitializeADC1_channel(adc1_channel_t channel, adc_atten_t attenuation);
 
     uint32_t ReadADC1(adc1_channel_t channel);
@@ -64,7 +62,7 @@ public:
     /**
      * Read and convert the result to mV
      */
-    bool ReadADC1_mV(adc1_channel_t channel, adc_atten_t attenuation, uint32_t* result);
+    bool ReadADC_mV(adc_channel_t channel, adc_atten_t attenuation, uint32_t* result);
 
     /**
      * Converts a value readed by ADC1 in mV
@@ -72,7 +70,6 @@ public:
     uint32_t ConvertToVoltage(uint32_t value, adc_atten_t attenuation);
 
 protected:
-    bool CalibrateADC1(void);
 
 private:
     esp_adc_cal_characteristics_t *adc1_characteristics;

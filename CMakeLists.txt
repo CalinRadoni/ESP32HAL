@@ -1,16 +1,21 @@
 set(HAL_CPU
-    src/cpu_cpu.cpp
+    "src/esp32_hal_cpu.cpp"
 )
 
 set(HAL_CORE
-    src/ESP32HAL.cpp
-    src/esp32_hal_adc.cpp
-    src/esp32_hal_gpio.cpp
-    src/cpu_spi.cpp
-    src/cpu_i2c.cpp
+    "src/esp32_hal_adc.cpp"
+    "src/esp32_hal_gpio.cpp"
+    "src/esp32_hal_spi.cpp"
+    "src/esp32_hal_i2c.cpp"
 )
 
-set(COMPONENT_SRCS ${HAL_CPU} ${HAL_CORE})
-set(COMPONENT_ADD_INCLUDEDIRS "src")
+set(HAL_REQUIRES
+    "esp_adc_cal"
+    "spi_flash"
+)
 
-register_component()
+idf_component_register(
+    SRCS ${HAL_CPU} ${HAL_CORE}
+    INCLUDE_DIRS "src"
+    REQUIRES ${HAL_REQUIRES}
+)
