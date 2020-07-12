@@ -5,9 +5,9 @@
         "options": {
             "cwd": "${workspaceFolder}/test",
             "env": {
-                "idf_tools": "${env:HOME}/esp/esp-idf/tools",
-                "idf_python": "${env:HOME}/.espressif/python_env/idf4.0_py3.8_env/bin/python",
-                "PATH": "${env:HOME}/.espressif/tools/xtensa-esp32-elf/esp-2019r2-8.2.0/xtensa-esp32-elf/bin:${env:PATH}"
+                "idf_tools": "${config:x_idf_path}/tools",
+                "idf_python": "${config:x_idf_python}",
+                "PATH": "${config:x_xtensa_path}:${env:PATH}"
             }
         },
         "presentation": {
