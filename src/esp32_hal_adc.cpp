@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "esp32_hal_adc.h"
 
-// -----------------------------------------------------------------------------
+namespace esp32hal {
 
-esp32_hal_adc::esp32_hal_adc(void)
+ADC::ADC(void)
 {
     adc1_characteristics = nullptr;
 }
 
-esp32_hal_adc::~esp32_hal_adc()
+ADC::~ADC()
 {
     if (adc1_characteristics != nullptr) {
         free(adc1_characteristics);
@@ -35,7 +35,7 @@ esp32_hal_adc::~esp32_hal_adc()
 
 // -----------------------------------------------------------------------------
 
-bool esp32_hal_adc::InitializeADC1(void)
+bool ADC::InitializeADC1(void)
 {
     if (ESP_OK != adc1_config_width(ADC_WIDTH_BIT_12)) return false;
 
@@ -55,7 +55,7 @@ bool esp32_hal_adc::InitializeADC1(void)
     return true;
 }
 
-bool esp32_hal_adc::InitializeADC1_channel(adc1_channel_t channel, adc_atten_t attenuation)
+bool ADC::InitializeADC1_channel(adc1_channel_t channel, adc_atten_t attenuation)
 {
     if (channel < ADC1_CHANNEL_0 || channel > ADC1_CHANNEL_7) return false;
     if (attenuation < ADC_ATTEN_DB_0 || attenuation > ADC_ATTEN_DB_11) return false;
@@ -69,12 +69,12 @@ bool esp32_hal_adc::InitializeADC1_channel(adc1_channel_t channel, adc_atten_t a
 
 // -----------------------------------------------------------------------------
 
-uint32_t esp32_hal_adc::ReadADC1(adc1_channel_t channel)
+uint32_t ADC::ReadADC1(adc1_channel_t channel)
 {
     return adc1_get_raw(channel);
 }
 
-uint32_t esp32_hal_adc::ReadADC1(adc1_channel_t channel, uint8_t samples)
+uint32_t ADC::ReadADC1(adc1_channel_t channel, uint8_t samples)
 {
     uint32_t val = 0;
 
@@ -89,7 +89,7 @@ uint32_t esp32_hal_adc::ReadADC1(adc1_channel_t channel, uint8_t samples)
 
 // -----------------------------------------------------------------------------
 
-bool esp32_hal_adc::ReadADC_mV(adc_channel_t channel, adc_atten_t attenuation, uint32_t* result)
+bool ADC::ReadADC_mV(adc_channel_t channel, adc_atten_t attenuation, uint32_t* result)
 {
     if (result == nullptr) return false;
 
@@ -120,7 +120,7 @@ bool esp32_hal_adc::ReadADC_mV(adc_channel_t channel, adc_atten_t attenuation, u
 
 // -----------------------------------------------------------------------------
 
-uint32_t esp32_hal_adc::ConvertToVoltage(uint32_t value, adc_atten_t attenuation)
+uint32_t ADC::ConvertToVoltage(uint32_t value, adc_atten_t attenuation)
 {
     esp_adc_cal_characteristics_t *characteristics = nullptr;
 
@@ -145,4 +145,4 @@ uint32_t esp32_hal_adc::ConvertToVoltage(uint32_t value, adc_atten_t attenuation
     return esp_adc_cal_raw_to_voltage(value, characteristics);
 }
 
-// -----------------------------------------------------------------------------
+} // namespace

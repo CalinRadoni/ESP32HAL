@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
 
+namespace esp32hal {
+
 /**
  * For adc1_channel_t:
  *  ADC1_CHANNEL_0 is GPIO36
@@ -48,10 +50,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *  ADC_ATTEN_DB_11  150mV to 2450mV
  */
 
-class esp32_hal_adc {
+class ADC
+{
 public:
-    esp32_hal_adc(void);
-    ~esp32_hal_adc();
+    ADC(void);
+    ~ADC();
 
     bool InitializeADC1(void);
     bool InitializeADC1_channel(adc1_channel_t channel, adc_atten_t attenuation);
@@ -69,10 +72,10 @@ public:
      */
     uint32_t ConvertToVoltage(uint32_t value, adc_atten_t attenuation);
 
-protected:
-
 private:
     esp_adc_cal_characteristics_t *adc1_characteristics;
 };
+
+} // namespace
 
 #endif
