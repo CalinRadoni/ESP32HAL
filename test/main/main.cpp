@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "esp32_hal_gpio.h"
 #include "esp32_hal_adc.h"
+#include "esp32_hal_i2c.h"
 
 #include "sdkconfig.h"
 
@@ -39,11 +40,16 @@ extern "C" {
 
     void app_main()
     {
-        esp32_hal_gpio hal_gpio;
-        esp32_hal_adc hal_adc;
+        esp32hal::GPIO gpio;
+        esp32hal::ADC adc1;
+        esp32hal::I2C i2c0;
 
-        if (!hal_gpio.ModeInput(GPIO_BOOT, true, false)){
-            ESP_LOGE(TAG, "hal_gpio.ModeInput failed !");
+        if (!gpio.ModeInput(GPIO_BOOT, true, false)) {
+            ESP_LOGE(TAG, "gpio.ModeInput failed !");
+        }
+
+        if (!adc1.InitializeADC1()) {
+            ESP_LOGE(TAG, "adc1.InitializeADC1 failed !");
         }
 
         // Print chip information
