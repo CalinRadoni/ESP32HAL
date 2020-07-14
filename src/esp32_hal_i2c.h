@@ -22,28 +22,53 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "esp32_hal_common.h"
 #include "driver/i2c.h"
 
-class esp32_hal_i2c {
+namespace esp32hal {
+
+struct I2COptions
+{
+    i2c_port_t port = i2c_port_t::I2C_NUM_0;    // use i2c_port_t::I2C_NUM_0 or i2c_port_t::I2C_NUM_1
+    gpio_num_t sda_gpio;
+    gpio_num_t scl_gpio;
+    bool enable_pull_up = false;
+    uint32_t clock_speed = 100000;  // clock speed in Hz, max 1 MHz, most sensors are working at 100 kHz.
+    uint32_t timeout = 1000; // timeout in ms. Minimum value will be set to 1 ms. Resolution is one tick period.
+};
+
+// This is a class for using the I2C peripherals (port 0 and port 1) of an ESP32 in Master mode
+class I2C
+{
 public:
-    esp32_hal_i2c(void);
-    virtual ~esp32_hal_i2c();
+    I2C(void);
+    virtual ~I2C();
 
-    /**
-     * Initializes the I2C in master mode
-     *
-     * @param port is the I2C port, 0 or 1
-     * @param clock_speed is the clock speed in Hz, max 1 MHz, most common value is 100 kHz
-     * @param enable_pull_up enable internal pull-up resistors for SDA and SCL lines
-     */
-    bool Initialize(uint8_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio, uint32_t clock_speed, bool enable_pull_up);
+    // Initializes the I2C in master mode.
+    bool Initialize(const I2COptions&);
 
-    /**
-     * Unloads the I2C driver
-     */
     void CleanUp(void);
 
+    // If 'data' == nullptr or 'length' == 0 writes only 'regAddr'
+    bool Write(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t length);
+
+    // Fails if 'data' == nullptr or 'length' == 0
+    bool Read(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t length, bool repeatedStart);
+
+    // Tests if a device is present at the specified address
+    // The custom timeout is to speed up a scan
+    //
+    // Scan example:
+    // for (uint8_t addr = 0x03; addr < 0x78; ++addr) {
+    //     if (TestAddress(addr)) {
+    //         // a device was found at this I2C address
+    //     }
+    // }
+    bool TestAddress(uint8_t devAddr, uint32_t testTimeout = 100);
+
 private:
-    i2c_port_t i2c_port;
     bool initialized;
+    i2c_port_t i2c_port;
+    TickType_t timeout;
 };
+
+} // namespace
 
 #endif
