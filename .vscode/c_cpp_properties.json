@@ -1,8 +1,8 @@
 {
     "env" : {
-        "idf_path": "${config:x_idf_path}",
-        "codeLib_path": "${config:x_codeLib_path}",
-        "compiler_path": "${config:x_xtensa_path}"
+        "idf_path": "${env:HOME}/esp/esp-idf",
+        "codeLib_path": "${env:CodeLib_PATH}",
+        "compiler_path": "$${env:HOME}/.espressif/tools/xtensa-esp32-elf/esp-2019r2-8.2.0/xtensa-esp32-elf/bin"
     },
     "configurations": [
         {

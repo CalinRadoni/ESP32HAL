@@ -1,6 +1,0 @@
-{
-    "x_codeLib_path": "${env:CodeLib_PATH}",
-    "x_idf_path": "${env:HOME}/esp/esp-idf",
-    "x_idf_python": "${env:HOME}/.espressif/python_env/idf4.0_py3.8_env/bin/python",
-    "x_xtensa_path": "${env:HOME}/.espressif/tools/xtensa-esp32-elf/esp-2019r2-8.2.0/xtensa-esp32-elf/bin"
-}
