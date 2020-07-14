@@ -18,20 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "esp32_hal_gpio.h"
 
-// -----------------------------------------------------------------------------
+namespace esp32hal {
 
-esp32_hal_gpio::esp32_hal_gpio(void)
+GPIO::GPIO(void)
 {
     //
 }
-esp32_hal_gpio::~esp32_hal_gpio()
+GPIO::~GPIO()
 {
     //
 }
 
 // -----------------------------------------------------------------------------
 
-bool esp32_hal_gpio::ModeDefault(gpio_num_t pinNumber)
+bool GPIO::ModeDefault(gpio_num_t pinNumber)
 {
     if ((pinNumber < GPIO_NUM_0) || (pinNumber > GPIO_NUM_MAX)) return false;
 
@@ -40,7 +40,7 @@ bool esp32_hal_gpio::ModeDefault(gpio_num_t pinNumber)
 
 }
 
-bool esp32_hal_gpio::ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown)
+bool GPIO::ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown)
 {
     if ((pinNumber < GPIO_NUM_0) || (pinNumber > GPIO_NUM_MAX)) return false;
 
@@ -61,7 +61,7 @@ bool esp32_hal_gpio::ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown)
     return true;
 }
 
-bool esp32_hal_gpio::ModeOutput(gpio_num_t pinNumber, bool high)
+bool GPIO::ModeOutput(gpio_num_t pinNumber, bool high)
 {
     if ((pinNumber < GPIO_NUM_0) || (pinNumber > GPIO_NUM_MAX)) return false;
 
@@ -85,4 +85,4 @@ bool esp32_hal_gpio::ModeOutput(gpio_num_t pinNumber, bool high)
     return true;
 }
 
-// -----------------------------------------------------------------------------
+} // namespace

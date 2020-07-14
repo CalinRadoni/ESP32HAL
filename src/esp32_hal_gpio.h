@@ -22,10 +22,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "esp32_hal_common.h"
 #include "driver/gpio.h"
 
-class esp32_hal_gpio {
+namespace esp32hal {
+
+class GPIO
+{
 public:
-    esp32_hal_gpio(void);
-    virtual ~esp32_hal_gpio();
+    GPIO(void);
+    virtual ~GPIO();
 
     /**
      * Reset a gpio to default state
@@ -51,5 +54,7 @@ public:
      */
     bool ModeOutput(gpio_num_t pinNumber, bool high);
 };
+
+} // namespace
 
 #endif
