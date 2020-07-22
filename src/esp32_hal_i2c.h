@@ -41,26 +41,36 @@ public:
     I2C(void);
     virtual ~I2C();
 
-    // Initializes the I2C in master mode.
+    /// Initializes the I2C in master mode.
     bool Initialize(const I2COptions&);
 
     void CleanUp(void);
 
-    // If 'data' == nullptr or 'length' == 0 writes only 'regAddr'
+    /// @brief Writes data.
+    /// @details If 'data' == nullptr or 'length' == 0 it writes only 'regAddr' byte.
+    /// @param devAddr is the address of the slave device
+    /// @param regAddr is the destination register
+    /// @param data is data to be written
+    /// @param length is the number of bytes to be written
+    /// @return true on success
     bool Write(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t length);
 
-    // Fails if 'data' == nullptr or 'length' == 0
+    /// Fails if 'data' == nullptr or 'length' == 0
     bool Read(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t length, bool repeatedStart);
 
-    // Tests if a device is present at the specified address
-    // The custom timeout is to speed up a scan
-    //
-    // Scan example:
-    // for (uint8_t addr = 0x03; addr < 0x78; ++addr) {
-    //     if (TestAddress(addr)) {
-    //         // a device was found at this I2C address
-    //     }
-    // }
+    /// @brief Tests if a device is present at the specified address
+    ///
+    /// @param devAddr is the address to test
+    /// @param testTimeout is a custom timeout to speed up a scan
+    ///
+    /// Scan example:
+    /// @code{.cpp}
+    /// for (uint8_t addr = 0x03; addr < 0x78; ++addr) {
+    ///     if (TestAddress(addr)) {
+    ///         // a device was found at this I2C address
+    ///     }
+    /// }
+    /// @endcode
     bool TestAddress(uint8_t devAddr, uint32_t testTimeout = 100);
 
 private:
