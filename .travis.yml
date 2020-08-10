@@ -1,7 +1,7 @@
 # Travis CI integration file for
 # esp-idf "stable" release
 #
-# In 2020.02.11 the stable release was v3.3.1
+# In 2020.07.16 the stable release was v4.0.1
 
 os: linux
 dist: xenial
@@ -19,29 +19,24 @@ addons:
     - python
     - python-pip
     - python-setuptools
-    - python-serial
-    - python-cryptography
-    - python-future
-    - python-pyparsing
     - cmake
     - ninja-build
     - ccache
+    - libffi-dev
+    - libssl-dev
 
 install:
   - mkdir ~/esp
   - cd ~/esp
-  - wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
-  - tar -xzf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
-  - git clone -b v3.3.1 --recursive https://github.com/espressif/esp-idf.git
-  - export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH"
-  - export IDF_PATH=~/esp/esp-idf
-  - export PATH="$IDF_PATH/tools:$PATH"
-  - python -m pip install --user -r $IDF_PATH/requirements.txt
+  - git clone -b v4.0.1 --recursive https://github.com/espressif/esp-idf.git
+  - cd ~/esp/esp-idf
+  - ./install.sh
+  - . ~/esp/esp-idf/export.sh
 
 script:
   - cd $TRAVIS_BUILD_DIR/example
   - idf.py reconfigure
-  - idf.py build
+  - idf.py app
 
 after_success:
   - cd $TRAVIS_BUILD_DIR/example
