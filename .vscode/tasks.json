@@ -59,32 +59,37 @@
             "label": "ESP-IDF Clean",
             "type": "shell",
             "command": "${idf_python} ${idf_tools}/idf.py fullclean",
-            "problemMatcher": [
-                {
-                    "owner": "cpp",
-                    "fileLocation": ["relative", "${workspaceFolder}"],
-                    "pattern": {
-                        "regexp": "^\\.\\.(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                        "file": 1,
-                        "line": 2,
-                        "column": 3,
-                        "severity": 4,
-                        "message": 5
-                    }
-                },
-                {
-                    "owner": "cpp",
-                    "fileLocation": "absolute",
-                    "pattern": {
-                        "regexp": "^[^\\.](.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                        "file": 1,
-                        "line": 2,
-                        "column": 3,
-                        "severity": 4,
-                        "message": 5
-                    }
-                }
-            ],
+            "problemMatcher": {}
+        },
+        {
+            "label": "ESP-IDF Flash",
+            "type": "shell",
+            "command": "${idf_python} ${idf_tools}/idf.py flash",
+            "problemMatcher": {}
+        },
+        {
+            "label": "ESP-IDF Monitor",
+            "type": "shell",
+            "command": "${idf_python} ${idf_tools}/idf.py monitor",
+            "problemMatcher": {}
+        },
+        {
+            "label": "ESP-IDF Build partition table",
+            "type": "shell",
+            "command": "${idf_python} ${idf_tools}/idf.py partition_table",
+            "problemMatcher": {}
+        },
+        {
+            "label": "ESP-IDF Flash partition table",
+            "type": "shell",
+            "command": "${idf_python} ${idf_tools}/idf.py partition_table-flash",
+            "problemMatcher": {}
+        },
+        {
+            "label": "ESP-IDF Size informations",
+            "type": "shell",
+            "command": "${idf_python} ${idf_tools}/idf.py size-components",
+            "problemMatcher": {}
         }
     ]
 }
