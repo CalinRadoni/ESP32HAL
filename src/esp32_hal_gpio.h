@@ -31,28 +31,38 @@ public:
     virtual ~GPIO();
 
     /**
-     * Reset a gpio to default state
+     * Reset a gpio to default state.
      *
-     * selects gpio function in IOMUX
-     * enables pullup and disable input and output
-     * disconnects any other peripheral output configured via GPIO Matrix
+     * This function:
+     * - selects GPIO function in IOMUX
+     * - enables pull-up and disable input and output
+     * - disconnects any other peripheral output configured via GPIO Matrix
+     *
+     * @param pinNumber use [GPIO_NUM_0 - 19, 21 - 23, 25 - 27, 32 ... GPIO_NUM_39]
      */
     bool ModeDefault(gpio_num_t pinNumber);
 
     /**
-     * Set a pin as input
+     * Set a pin as input.
      *
-     * @param pinNumber
-     * @param pullUp
-     * @param pullDown
+     * At least one of pull-up and pull-down must be disabled otherwise
+     * the function will return false.
+     *
+     * @param pinNumber use [GPIO_NUM_0 - 19, 21 - 23, 25 - 27, 32 ... GPIO_NUM_39]
+     * @param pullUp use GPIO_PULLUP_ENABLE or GPIO_PULLUP_DISABLE
+     * @param pullDown use GPIO_PULLDOWN_ENABLE or GPIO_PULLDOWN_DISABLE
      */
-    bool ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown);
+    bool ModeInput(gpio_num_t pinNumber, gpio_pullup_t pullUp = GPIO_PULLUP_DISABLE, gpio_pulldown_t pullDown = GPIO_PULLDOWN_DISABLE);
 
     /**
-     * Set a pin as output without pull-up or pull-down
-     * and set the value of the output
+     * Put a pin in output mode and set its level.
+     *
+     * Pull-up and pull-down are disabled.
+     *
+     * @param pinNumber use [GPIO_NUM_0 - 19, 21 - 23, 25 - 27, 32 ... GPIO_NUM_33], (34 - 39 are input only)
+     * @param level sets the output to LOW if 0, HIGH otherwise
      */
-    bool ModeOutput(gpio_num_t pinNumber, bool high);
+    bool ModeOutput(gpio_num_t pinNumber, uint32_t level);
 };
 
 } // namespace

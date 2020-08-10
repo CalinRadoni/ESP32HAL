@@ -40,17 +40,18 @@ bool GPIO::ModeDefault(gpio_num_t pinNumber)
 
 }
 
-bool GPIO::ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown)
+bool GPIO::ModeInput(gpio_num_t pinNumber, gpio_pullup_t pullUp, gpio_pulldown_t pullDown)
 {
-    if ((pinNumber < GPIO_NUM_0) || (pinNumber > GPIO_NUM_MAX)) return false;
+    if ((pinNumber < GPIO_NUM_0) || (pinNumber >= GPIO_NUM_MAX)) return false;
+    if ((pullUp != GPIO_PULLUP_DISABLE) && (pullDown != GPIO_PULLDOWN_DISABLE)) return false;
 
     gpio_config_t gc;
     esp_err_t err;
 
     gc.pin_bit_mask = 1ULL << pinNumber;
     gc.mode         = GPIO_MODE_INPUT;
-    gc.pull_up_en   = pullUp ? GPIO_PULLUP_ENABLE : GPIO_PULLUP_DISABLE;
-    gc.pull_down_en = pullDown ? GPIO_PULLDOWN_ENABLE : GPIO_PULLDOWN_DISABLE;
+    gc.pull_up_en   = pullUp;
+    gc.pull_down_en = pullDown;
     gc.intr_type    = GPIO_INTR_DISABLE;
 
     err = gpio_config(&gc);
@@ -61,9 +62,9 @@ bool GPIO::ModeInput(gpio_num_t pinNumber, bool pullUp, bool pullDown)
     return true;
 }
 
-bool GPIO::ModeOutput(gpio_num_t pinNumber, bool high)
+bool GPIO::ModeOutput(gpio_num_t pinNumber, uint32_t level)
 {
-    if ((pinNumber < GPIO_NUM_0) || (pinNumber > GPIO_NUM_MAX)) return false;
+    if ((pinNumber < GPIO_NUM_0) || (pinNumber >= GPIO_NUM_MAX)) return false;
 
     gpio_config_t gc;
     esp_err_t err;
@@ -77,7 +78,7 @@ bool GPIO::ModeOutput(gpio_num_t pinNumber, bool high)
     err = gpio_config(&gc);
     if (err != ESP_OK) return false;
 
-    err = gpio_set_level(pinNumber, high ? 1 : 0);
+    err = gpio_set_level(pinNumber, level);
     if (err != ESP_OK) return false;
 
     gpio_pad_select_gpio(pinNumber);

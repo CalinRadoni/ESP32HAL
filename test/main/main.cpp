@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "esp32_hal_gpio.h"
 #include "esp32_hal_adc.h"
 #include "esp32_hal_i2c.h"
+#include "esp32_hal_spi.h"
 
 #include "sdkconfig.h"
 
@@ -43,8 +44,9 @@ extern "C" {
         esp32hal::GPIO gpio;
         esp32hal::ADC adc1;
         esp32hal::I2C i2c0;
+        esp32hal::SPI hspi;
 
-        if (!gpio.ModeInput(GPIO_BOOT, true, false)) {
+        if (!gpio.ModeInput(GPIO_BOOT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE)) {
             ESP_LOGE(TAG, "gpio.ModeInput failed !");
         }
 
