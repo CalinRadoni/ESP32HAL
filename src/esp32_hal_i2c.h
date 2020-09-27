@@ -26,7 +26,7 @@ namespace esp32hal {
 
 struct I2COptions
 {
-    i2c_port_t port = i2c_port_t::I2C_NUM_0;    // use i2c_port_t::I2C_NUM_0 or i2c_port_t::I2C_NUM_1
+    i2c_port_t port = 0;    // must be [0 ... SOC_I2C_NUM)
     gpio_num_t sda_gpio;
     gpio_num_t scl_gpio;
     bool enable_pull_up = false;

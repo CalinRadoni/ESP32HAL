@@ -26,7 +26,7 @@ const uint32_t default_timeout = 1000;
 I2C::I2C(void)
 {
     initialized = false;
-    i2c_port = i2c_port_t::I2C_NUM_MAX;
+    i2c_port = 0;
     timeout = default_timeout / portTICK_PERIOD_MS;
 }
 
@@ -43,7 +43,7 @@ bool I2C::Initialize(const I2COptions& options)
 
     if (initialized) CleanUp();
 
-    if ((options.port != i2c_port_t::I2C_NUM_0) && (options.port != i2c_port_t::I2C_NUM_1)) return false;
+    if (options.port >= SOC_I2C_NUM) return false;
 
     i2c_port = options.port;
     timeout = options.timeout / portTICK_PERIOD_MS;
