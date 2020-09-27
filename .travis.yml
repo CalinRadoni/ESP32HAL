@@ -31,12 +31,12 @@ install:
   - . ~/esp/esp-idf/export.sh
 
 script:
-  - cd $TRAVIS_BUILD_DIR/example
+  - cd $TRAVIS_BUILD_DIR/test
   - idf.py reconfigure
   - idf.py app
 
 after_success:
-  - cd $TRAVIS_BUILD_DIR/example
+  - cd $TRAVIS_BUILD_DIR/test
   - idf.py size
 
 branches:
