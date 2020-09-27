@@ -1,5 +1,7 @@
 # Helper component for ESP32
 
+[![Build Status](https://travis-ci.com/CalinRadoni/ESP32HAL.svg?branch=main)](https://travis-ci.com/CalinRadoni/ESP32HAL)
+
 Helper object for ESP32 generic peripherals.
 
 This is a *work-in-progress* and should be tested before use.
