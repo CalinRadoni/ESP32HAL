@@ -10,6 +10,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        uses: CalinRadoni/esp-idf-v4.1-action
+        uses: CalinRadoni/esp-idf-v4.1-action@v0.1
         with:
           src-directory: 'test'
