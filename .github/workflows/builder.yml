@@ -9,9 +9,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - run: pwd
-
       - name: Build
-        uses: CalinRadoni/esp-idf-v4.1-action@v0.1
+        uses: CalinRadoni/esp-idf-v4.1-action@v0.2
         with:
           src-directory: 'test'
