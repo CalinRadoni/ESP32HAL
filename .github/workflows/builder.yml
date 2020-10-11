@@ -1,0 +1,15 @@
+on: [push]
+
+jobs:
+  builder:
+    name: Builder for test project
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        uses: CalinRadoni/esp-idf-v4.1-action
+        with:
+          src-directory: 'test'
