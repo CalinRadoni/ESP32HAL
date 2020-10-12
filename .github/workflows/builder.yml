@@ -1,3 +1,5 @@
+name: ESP32 Builder
+
 on: [push]
 
 jobs:
@@ -11,3 +13,6 @@ jobs:
 
       - name: Build
         uses: CalinRadoni/esp-idf-v4-action@v0.3
+        with:
+          esp_idf_version: 'v4.1'
+          src_directory: 'test'
