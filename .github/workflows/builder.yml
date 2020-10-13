@@ -4,15 +4,21 @@ on: [push]
 
 jobs:
   builder:
-    name: Builder for test project
+    name: Builder for the test project
     runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build
-        uses: CalinRadoni/esp-idf-v4-action@v0.3
+      - name: Install ESP-IDF
+        uses: CalinRadoni/esp-idf-v4-action@v2
         with:
           esp_idf_version: 'v4.1'
-          src_directory: 'test'
+
+      - name: Build
+        run: |
+          source ~/esp/esp-idf/export.sh
+          idf.py reconfigure
+          idf.py app
+          idf.py size
