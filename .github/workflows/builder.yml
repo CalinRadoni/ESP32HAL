@@ -19,6 +19,7 @@ jobs:
       - name: Build
         run: |
           source ~/esp/esp-idf/export.sh
+          cd test
           idf.py reconfigure
           idf.py app
           idf.py size
