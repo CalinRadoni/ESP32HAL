@@ -1,4 +1,4 @@
-name: ESP32 Builder
+name: Build with ESP-IDF v4.1
 
 on: [push]
 
