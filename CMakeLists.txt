@@ -7,6 +7,7 @@ set(HAL_CORE
     "src/esp32_hal_gpio.cpp"
     "src/esp32_hal_spi.cpp"
     "src/esp32_hal_i2c.cpp"
+    "src/esp32_hal_timers.cpp"
 )
 
 set(HAL_REQUIRES
