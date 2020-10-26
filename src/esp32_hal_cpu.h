@@ -20,26 +20,48 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define esp32_hal_cpu_H
 
 #include "esp32_hal_common.h"
+#include "freertos/task.h"
+#include <string>
+
+namespace esp32hal {
 
 /**
- * ESP32-WROOM-32 Pin Layout, top view
- *
- *       Gnd  1                     38 Gnd
- *       3V3  2                     37 IO23
- *        En  3                     36 IO22
- * Sensor_VP  4                     35 TxD0
- * Sensor_VN  5                     34 RxD0
- *      IO34  6                     33 IO21
- *      IO35  7        39 Gnd       32 nc
- *      IO32  8                     31 IO19
- *      IO33  9                     30 IO18
- *      IO25 10                     29 IO5
- *      IO26 11                     28 IO17
- *      IO27 12                     27 IO16
- *      IO14 13                     26 IO4
- *      IO12 14                     25 IO0
- *             Gnd IO13 ... IO15 IO2
- *              15  16  ...  23  24
+ * For detailed TaskStatus set:
+ * - CONFIG_FREERTOS_USE_TRACE_FACILITY=y
+ * - CONFIG_FREERTOS_GENERATE_RUN_TIME_STATS=y
+ * - CONFIG_FREERTOS_VTASKLIST_INCLUDE_COREID=y
  */
+
+class CPU
+{
+public:
+    CPU(void);
+    virtual ~CPU();
+
+    std::string chipModel;
+    uint8_t revision;
+    uint8_t numberOfCores;
+    bool feat_embeddedFlash;
+    bool feat_WiFi_BGN;
+    bool feat_BT;
+    bool feat_BLE;
+
+    multi_heap_info_t heapInfo;
+    void RefreshHeapSize(void);
+
+    uint32_t GetRandomNumber(void);
+
+    TaskStatus_t* tasks;
+    bool RefreshSystemState(void);
+    void PrintTaskStatus(void);
+    void ClearTaskStatus(void);
+
+protected:
+    uint32_t runTime;
+    uint32_t taskCount;
+	void ReadChipInfo(void);
+};
+
+} // namespace
 
 #endif
