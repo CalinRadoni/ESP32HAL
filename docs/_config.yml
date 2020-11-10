@@ -1,0 +1,121 @@
+# ------------------------------------------------------------------------------
+# Site settings
+# ------------------------------------------------------------------------------
+
+title: "ESP32HAL"
+description: "Docs for ESP32HAL ESP-IDF component"
+logo: /assets/img/logo.png
+
+# this demo site is published under the "/demo" path. It is useful for GitHub Pages
+# that are not published under the root path.
+# if published under the root path, comment the next line
+baseurl: /ESP32HAL
+
+# ------------------------------------------------------------------------------
+# Theme settings
+# ------------------------------------------------------------------------------
+
+author-name: "Calin Radoni"
+author-email: CalinRadoni@users.noreply.github.com
+copyright-text: "2020"
+
+# set the date format to ISO8601. See https://shopify.github.io/liquid/filters/date/ for other formats
+date-format: "%F"
+
+remote_theme: "CalinRadoni/simple-purple-theme@main"
+skin: purple
+# skin: blue
+
+home-logo: /assets/img/logo.svg
+header-links:
+  - name: "calinradoni.github.io"
+    url: https://calinradoni.github.io/
+
+social-links:
+  - site: GitHub
+    link: https://github.com/CalinRadoni
+  - site: LinkedIn
+    link: https://www.linkedin.com/in/...
+
+share-buttons:
+  - Facebook
+  - Twitter
+  - Reddit
+  - LinkedIn
+  - WhatsApp
+  - Email
+
+publisher:
+  - person: true
+    name: "Calin Radoni"
+    url: https://github.com/CalinRadoni
+#  - person: false
+#    name: "the Company Name"
+#    logo-url: /assets/img/company-logo.png
+
+post-excerpt-maxlen: 50
+post-date-in-preview: true
+post-desc-in-posts: true
+post-desc-in-tc-pages: true
+post-desc-in-header: true
+post-prev-and-next: true
+post-related-posts: true
+post-related-cnt: 4
+post-related-tag-cnt: 2
+post-show-category: true
+use-headline: true
+
+# ------------------------------------------------------------------------------
+# Jekyll settings
+# ------------------------------------------------------------------------------
+
+markdown: kramdown
+
+# exclusions ...
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+
+# ... and inclusions
+include:
+  - pages
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /pages/:short_year:month:day-:slug:output_ext
+  - scope:
+      path: "pages"
+      type: pages
+    values:
+      layout: page
+      permalink: /pages/:basename
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: doc
+
+# required plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-remote-theme
+
+# setting for jekyll-paginate
+# jekyll-paginate will produce pagination from /pages/index.html page
+paginate: 5
+paginate_path: "/pages/page:num"

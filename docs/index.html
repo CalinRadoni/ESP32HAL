@@ -1,0 +1,64 @@
+---
+layout: home
+image: /assets/img/default-article.png
+image-w: 1200
+image-h: 630
+image-d: "The text simple purple theme written in purple over a dark gray background"
+---
+
+<section class="row padding-2 back-grad">
+  <div class="card padding-1">
+    <div class="body text-left stretched">
+        <h1>{{ site.title }}</h1>
+        <h3>{{ site.description }}</h3>
+        <p class="margin-t1">
+            <a class="button-simple no-wrap" href="{{ site.baseurl }}{% link pages/docs.md %}">Documentation</a>
+            <a class="button-clear no-wrap" href="https://github.com/CalinRadoni/ESP32HAL">GitHub Repo</a>
+            <a class="button-clear no-wrap" href="https://github.com/CalinRadoni/ESP32HAL/blob/main/test/main/main.cpp">Example code</a>
+            <a class="button-clear no-wrap" href="https://github.com/CalinRadoni/ESP32HAL/blob/main/.github/workflows/builder.yml">Build Action</a>
+        </p>
+    </div>
+  </div>
+</section>
+
+<section class="row-vh limited-width padding-1h">
+    <div class="card card-m1vh padding-1">
+        <a class="body stretched text-left-center block2d" href="{{ site.baseurl }}{% link pages/docs.md %}">
+            <h2>CPU</h2>
+            <p>info, tasks, heap</p>
+        </a>
+    </div>
+    <div class="card card-m1vh padding-1 back-footer-color">
+        <a class="body stretched text-left-center block2d" href="{{ site.baseurl }}{% link pages/docs.md %}">
+            <h2>GPIO</h2>
+            <p></p>
+        </a>
+    </div>
+    <div class="card card-m1vh padding-1">
+        <a class="body stretched text-left-center block2d" href="{{ site.baseurl }}{% link pages/docs.md %}">
+            <h2>ADC</h2>
+            <p>ADC1, 8 channels, 12 bits</p>
+        </a>
+    </div>
+</section>
+
+<section class="row-vh limited-width padding-1h">
+    <div class="card card-m1vh padding-1 back-footer-color">
+        <a class="body stretched text-left-center block2d" href="{{ site.baseurl }}{% link pages/docs.md %}">
+            <h2>I2C</h2>
+            <p>I2C0 and I2C1, master mode</p>
+        </a>
+    </div>
+    <div class="card card-m1vh padding-1 back-footer-color">
+        <a class="body stretched text-left-center block2d" href="{{ site.baseurl }}{% link pages/docs.md %}">
+            <h2>SPI</h2>
+            <p>HSPI and VSPI, master mode</p>
+        </a>
+    </div>
+    <div class="card card-m1vh padding-1">
+        <a class="body stretched text-left-center block2d" href="{{ site.baseurl }}{% link pages/docs.md %}">
+            <h2>Timers</h2>
+            <p>ESP32's 4 hardware timers</p>
+        </a>
+    </div>
+</section>
