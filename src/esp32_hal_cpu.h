@@ -38,6 +38,9 @@ public:
     CPU(void);
     virtual ~CPU();
 
+    /**
+     * These are set by the `ReadChipInfo` function (called from constructor).
+     */
     std::string chipModel;
     uint8_t revision;
     uint8_t numberOfCores;
@@ -46,19 +49,37 @@ public:
     bool feat_BT;
     bool feat_BLE;
 
-    multi_heap_info_t heapInfo;
-    void RefreshHeapSize(void);
-
     uint32_t GetRandomNumber(void);
 
+    /** heapInfo is set by `RefreshHeapSize` function. */
+    multi_heap_info_t heapInfo;
+
+    /**
+     * Sets the `heapInfo` structure.
+     *
+     * Is called from `RefreshSystemState` function.
+     */
+    void RefreshHeapSize(void);
+
+    /**
+     * Status of tasks.
+     *
+     * The `RefreshSystemState` function creates and sets the content of this variable.
+     * Each call to `RefreshSystemState` destroys and recreates this variable.
+     *
+     * `tasks` is destroyed by calling the `ClearTaskStatus` function.
+     * `ClearTaskStatus` is called from destructor.
+     */
     TaskStatus_t* tasks;
+
     bool RefreshSystemState(void);
     void PrintTaskStatus(void);
     void ClearTaskStatus(void);
 
 protected:
-    uint32_t runTime;
-    uint32_t taskCount;
+    uint32_t runTime; /** set from the `RefreshSystemState` function */
+    uint32_t taskCount; /** set from the `RefreshSystemState` function */
+
 	void ReadChipInfo(void);
 };
 

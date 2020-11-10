@@ -71,6 +71,8 @@ bool CPU::RefreshSystemState(void)
 {
     ClearTaskStatus();
 
+    RefreshHeapSize();
+
 #ifdef configUSE_TRACE_FACILITY
     taskCount = uxTaskGetNumberOfTasks();
 
@@ -93,7 +95,6 @@ void CPU::PrintTaskStatus(void)
     uint32_t taskRunPercentage;
     uint32_t totalRunTime = runTime / 100UL; // for percentage calculations;
 
-    RefreshHeapSize();
     ESP_LOGI(TAG, "Heap bytes allocated %d, free/largest/lifetime_minimum: %d %d %d",
         heapInfo.total_allocated_bytes,
         heapInfo.total_free_bytes,
