@@ -7,40 +7,28 @@ Helper object for ESP32 generic peripherals.
 
 This is a *work-in-progress* and should be tested before use.
 
-## Implemented classes
+## Classes
 
-- GPIO
-- ADC
-- I2C
-- SPI
-- CPU (*incomplete, more functions should be added*)
-- Timers
+Implemented classes are:
 
-### Timers
+- CPU information, tasks, heap
+- GPIO simple usage
+- ADC for ADC1, 8 channels, 12 bits, selectable attenuation
+- I2C master and SPI master
+- Timers, for ESP32's hardware timers, with FreeRTOS Task Notifications
 
-The `Timers` class uses FreeRTOS Task Notifications as light weight counting semaphores.
-If you want to read more about those see the [RTOS Task Notifications](https://www.freertos.org/RTOS-task-notifications.html) document.
+See [ESP32HAL documentation](https://calinradoni.github.io/ESP32HAL/) for more information.
 
-## Tests
+## Usage and tests
 
-Tested with:
-
-- GPIO: WS2812* controlled with ESP32-DevKitC board and a level convertor made from two 74HCT1G04 inverters
-- GPIO: WS2818B in pax-LampD1 (ESP32-WROOM-32 module + 2 x SN74LV1T34 logic level shifters)
-- ADC: *not yet*
-- I2C: *not yet*
-- SPI: *not yet*
-- Timers: in pax-LampD1
-
-Read more about [pax-LampD1](https://github.com/CalinRadoni/pax-LampD1) if intereseted.
+- used in [pax-LampD1](https://github.com/CalinRadoni/pax-LampD1)
+- tested with ESP32-DevKitC
 
 ## Development Environment
 
-Currently uses the latest stable version of [Espressif IoT Development Framework](https://github.com/espressif/esp-idf) - v4.1 as of October 2020.
-
-Editing was done in [Visual Studio Code](https://code.visualstudio.com).
-
-Version control with [Git](https://git-scm.com).
+- the stable version of [Espressif IoT Development Framework](https://github.com/espressif/esp-idf) - v4.1 as of October 2020
+- editing was done in [Visual Studio Code](https://code.visualstudio.com)
+- version control with [Git](https://git-scm.com)
 
 ## License
 
