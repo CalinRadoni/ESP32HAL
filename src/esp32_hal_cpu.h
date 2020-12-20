@@ -39,7 +39,7 @@ public:
     virtual ~CPU();
 
     /**
-     * These are set by the `ReadChipInfo` function (called from constructor).
+     * These are set by the `ReadChipInfo` function.
      */
     std::string chipModel;
     uint8_t revision;
@@ -48,7 +48,20 @@ public:
     bool feat_WiFi_BGN;
     bool feat_BT;
     bool feat_BLE;
+    uint32_t espFlashID;   // Lower 16 bits are the chip ID, upper 8 bits are the manufacturer ID.
+    uint32_t espFlashSize; // Flash size based on flash ID.
+    uint32_t spiFlashSize; // Flash chip size, as set in binary image header. This value does not necessarily match real flash size.
 
+    /**
+     * Reads chip and memory info.
+     *
+     * @note Do not call this function from constructor or you may not get espFlashID and espFlashSize.
+     */
+	void ReadChipInfo(void);
+
+    /**
+     * Return a random number
+     */
     uint32_t GetRandomNumber(void);
 
     /** heapInfo is set by `RefreshHeapSize` function. */
@@ -79,8 +92,6 @@ public:
 protected:
     uint32_t runTime; /** set from the `RefreshSystemState` function */
     uint32_t taskCount; /** set from the `RefreshSystemState` function */
-
-	void ReadChipInfo(void);
 };
 
 } // namespace

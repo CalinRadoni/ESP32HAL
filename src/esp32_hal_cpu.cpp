@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "esp32_hal_cpu.h"
 #include "esp_log.h"
+#include "esp_flash.h"
+#include "esp_spi_flash.h"
 
 namespace esp32hal {
 
@@ -26,11 +28,19 @@ static const char* TAG = "ESP32";
 // -----------------------------------------------------------------------------
 
 CPU::CPU(void) {
-    ReadChipInfo();
-
     runTime = 0;
     taskCount = 0;
     tasks = nullptr;
+
+    revision = 0;
+    numberOfCores = 0;
+    feat_embeddedFlash = false;
+    feat_WiFi_BGN = false;
+    feat_BT = false;
+    feat_BLE = false;
+    espFlashID = 0;
+    espFlashSize = 0;
+    spiFlashSize = 0;
 }
 
 CPU::~CPU() {
@@ -65,6 +75,10 @@ void CPU::ReadChipInfo(void)
     feat_BLE           = chipInfo.features & CHIP_FEATURE_BLE;
     numberOfCores = chipInfo.cores;
     revision = chipInfo.revision;
+
+    esp_flash_read_id(NULL, &espFlashID);
+    esp_flash_get_size(NULL, &espFlashSize);
+    spiFlashSize = spi_flash_get_chip_size();
 }
 
 bool CPU::RefreshSystemState(void)
