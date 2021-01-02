@@ -49,8 +49,8 @@ public:
     bool feat_BT;
     bool feat_BLE;
     uint32_t espFlashID;   // Lower 16 bits are the chip ID, upper 8 bits are the manufacturer ID.
-    uint32_t espFlashSize; // Flash size based on flash ID.
-    uint32_t spiFlashSize; // Flash chip size, as set in binary image header. This value does not necessarily match real flash size.
+    uint32_t espFlashSize; // [bytes] Flash size based on flash ID.
+    uint32_t spiFlashSize; // [bytes] Flash chip size, as set in binary image header. This value does not necessarily match real flash size.
 
     /**
      * Reads chip and memory info.

@@ -76,8 +76,8 @@ void CPU::ReadChipInfo(void)
     numberOfCores = chipInfo.cores;
     revision = chipInfo.revision;
 
-    esp_flash_read_id(NULL, &espFlashID);
-    esp_flash_get_size(NULL, &espFlashSize);
+    if (esp_flash_read_id(NULL, &espFlashID) != ESP_OK) espFlashID = 0;
+    if (esp_flash_get_size(NULL, &espFlashSize) != ESP_OK) espFlashSize = 0;
     spiFlashSize = spi_flash_get_chip_size();
 }
 
