@@ -64,9 +64,12 @@ void CPU::ReadChipInfo(void)
     esp_chip_info_t chipInfo;
     esp_chip_info(&chipInfo);
 
-    switch (chipInfo.model) {
-        case esp_chip_model_t::CHIP_ESP32: chipModel = "ESP32"; break;
-        case esp_chip_model_t::CHIP_ESP32S2BETA: chipModel = "ESP32-S2 Beta"; break;
+    uint8_t cm = (uint8_t)chipInfo.model;
+    switch (cm) {
+        case 1: chipModel = "ESP32"; break;
+        case 2: chipModel = "ESP32-S2"; break;
+        case 4: chipModel = "ESP32-S3"; break;
+        case 5: chipModel = "ESP32-C3"; break;
         default: chipModel = "unknown"; break;
     }
     feat_embeddedFlash = chipInfo.features & CHIP_FEATURE_EMB_FLASH;
