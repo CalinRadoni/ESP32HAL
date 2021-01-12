@@ -1,0 +1,18 @@
+name: Build with ESP-IDF v4.2
+
+on: [push]
+
+jobs:
+  builder:
+    name: Builder for the test project
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        uses: CalinRadoni/esp-idf-v4-container-action@v4.2
+        id: execution
+        with:
+          entrypoint: /github/workspace/test/action-build.sh
