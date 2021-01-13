@@ -10,9 +10,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          path: ESP32HAL
 
       - name: Build
         uses: CalinRadoni/esp-idf-v4-container-action@latest
         id: execution
         with:
-          entrypoint: /github/workspace/test/action-build.sh
+          entrypoint: /github/workspace/ESP32HAL/test/action-build.sh
