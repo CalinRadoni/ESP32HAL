@@ -18,3 +18,13 @@ jobs:
         id: execution
         with:
           entrypoint: /github/workspace/ESP32HAL/test/action-build.sh
+
+      - name: Compute SHA256 for bin and elf files
+        if: steps.execution.outputs.result == 0
+        run: |
+          file="${{ github.workspace }}/ESP32HAL/test/build/test-ESP32HAL.bin"
+          hash=$(sha256sum -b "$file")
+          stat -c"$hash %s" "$file"
+          file="${{ github.workspace }}/ESP32HAL/test/build/test-ESP32HAL.elf"
+          hash=$(sha256sum -b "$file")
+          stat -c"$hash %s" "$file"
