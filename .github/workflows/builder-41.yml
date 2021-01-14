@@ -32,5 +32,5 @@ jobs:
           files=("$fileE" "$fileB")
           for file in "${files[@]}"; do
             hash=$(sha256sum -b "$file")
-            stat -c"${hash%% *} %n %s" "$file"
+            stat -c"${hash%% *} ${file##*/} %s" "$file"
           done
