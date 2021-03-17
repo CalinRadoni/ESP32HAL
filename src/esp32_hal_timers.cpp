@@ -172,7 +172,7 @@ bool Timers::RestartTimer(uint8_t groupIn, uint8_t indexIn, uint32_t periodMS)
 
     // do not check these again because the checks are allready performed
     // in the `timer_set_alarm_value` and `timer_set_alarm` functions
-    // I am favoring the speed a little
+    // I am favouring the speed a little
     // if (group >= timer_group_t::TIMER_GROUP_MAX) return false;
     // if (index >= timer_idx_t::TIMER_MAX) return false;
 

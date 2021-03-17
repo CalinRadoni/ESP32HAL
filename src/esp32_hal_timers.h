@@ -49,7 +49,7 @@ public:
     virtual ~Timers();
 
     /**
-     * @brief Enable and start a timer
+     * @brief Enable and start a timer.
      *
      * ESP32 has two groups of two timers:
      * - timer_group_t::TIMER_GROUP_0, timer_idx_t::TIMER_0
@@ -60,7 +60,7 @@ public:
      * @param task       The task to be notified
      * @param group      Timer group
      * @param index      Timer index
-     * @param periodMS   Sets the timer's periond in miliseconds
+     * @param periodMS   Sets the timer's period in miliseconds
      * @param autoreload Autoreload the timer
      * @param singleShot Single shot or repeated triggering
      */
