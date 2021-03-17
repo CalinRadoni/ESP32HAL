@@ -1,6 +1,5 @@
 # Helper component for ESP32
 
-[![Build Status](https://travis-ci.com/CalinRadoni/ESP32HAL.svg?branch=main)](https://travis-ci.com/CalinRadoni/ESP32HAL)
 ![Build with ESP-IDF v4.1](https://github.com/CalinRadoni/ESP32HAL/workflows/Build%20with%20ESP-IDF%20v4.1/badge.svg)
 ![Build with ESP-IDF v4.2](https://github.com/CalinRadoni/ESP32HAL/workflows/Build%20with%20ESP-IDF%20v4.2/badge.svg)
 ![Build with ESP-IDF latest](https://github.com/CalinRadoni/ESP32HAL/workflows/Build%20with%20ESP-IDF%20latest/badge.svg)

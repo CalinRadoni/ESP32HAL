@@ -4,4 +4,6 @@ set(EXTRA_COMPONENT_DIRS "..")
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 
+set(SUPPORTED_TARGETS esp32)
+
 project(test-ESP32HAL)
